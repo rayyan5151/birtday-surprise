@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Birthday Surprise ♡</title>
+<style>
+body {
+  margin:0; padding:25px;
+  min-height:100vh;
+  display:grid; place-items:center;
+  background:linear-gradient(135deg,#ffe3ef,#f7b6d0);
+  font-family:Georgia,serif;
+  color:#a64d73;text-align:center;
+}
+.box {
+  background:#fff8fb;
+  padding:30px 20px;
+  border-radius:25px;
+  width:min(400px,90%);
+  box-shadow:0 10px 35px #c66a9033;
+}
+h1 {color:#d45c91;font-weight:normal}
+input {
+  padding:13px;border:1px solid pink;
+  border-radius:20px;width:80%;
+}
+button {
+  background:#d45c91;color:white;
+  border:0;padding:13px 22px;
+  border-radius:25px;margin:12px;
+}
+.hidden {display:none}
+#flowers {font-size:25px;animation:fall 2s infinite alternate}
+@keyframes fall {
+  from {transform:translateY(-8px)}
+  to {transform:translateY(12px)}
+}
+</style>
+</head>
+<body>
+
+<div class="box" id="login">
+<h1>♡ Secret Garden ♡</h1>
+<p>A little surprise for you...</p>
+<input id="pass" type="password" placeholder="Enter password">
+<br>
+<button onclick="unlock()">Unlock ♡</button>
+<p id="error"></p>
+</div>
+
+<div class="box hidden" id="birthday">
+<h1>Happy Birthday! 🌷</h1>
+<p>Tap the birthday box!</p>
+<button onclick="surprise()">🎁 Open Surprise</button>
+</div>
+
+<div class="box hidden" id="letter">
+<div id="flowers">🌸 🌷 💗 🌸</div>
+<h1>For You ♡</h1>
+<h2>Happy Birthday!</h2>
+<p id="message">
+Dear friend,
+
+Happy Birthday! May your day
+be filled with happiness and laughter.
+
+Thank you for being a wonderful friend.
+Here's to more beautiful memories!
+
+With friendship ♡
+</p>
+<p>Our Little Memories 📸</p>
+<input type="file" accept="image/*" multiple onchange="photos(event)">
+<div id="gallery"></div>
+<p>Our Birthday Song 🎵</p>
+<input type="file" accept="audio/*" onchange="music(event)">
+<div id="player"></div>
+</div>
+
+<script>
+function unlock(){
+if(document.getElementById("pass").value==="pink123"){
+document.getElementById("login").classList.add("hidden");
+document.getElementById("birthday").classList.remove("hidden");
+}else{
+document.getElementById("error").textContent="Wrong password ♡";
+}
+}
+function surprise(){
+document.getElementById("birthday").classList.add("hidden");
+document.getElementById("letter").classList.remove("hidden");
+}
+function photos(e){
+let g=document.getElementById("gallery");
+g.innerHTML="";
+Array.from(e.target.files).forEach(f=>{
+let img=document.createElement("img");
+img.src=URL.createObjectURL(f);
+img.style.width="90px";
+img.style.margin="5px";
+g.appendChild(img);
+});
+}
+function music(e){
+let p=document.getElementById("player");
+p.innerHTML="";
+let a=document.createElement("audio");
+a.controls=true;
+a.src=URL.createObjectURL(e.target.files[0]);
+p.appendChild(a);
+}
+</script>
+</body>
+</html>
