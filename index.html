@@ -1,122 +1,140 @@
-
-<!DOCTYPE html>
+ 
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Birthday Surprise ♡</title>
+<title>A Birthday Keepsake ♡</title>
 <style>
-body {
-  margin:0; padding:25px;
-  min-height:100vh;
-  display:grid; place-items:center;
-  background:linear-gradient(135deg,#ffe3ef,#f7b6d0);
-  font-family:Georgia,serif;
-  color:#a64d73;text-align:center;
-}
-.box {
-  background:#fff8fb;
-  padding:30px 20px;
-  border-radius:25px;
-  width:min(400px,90%);
-  box-shadow:0 10px 35px #c66a9033;
-}
-h1 {color:#d45c91;font-weight:normal}
-input {
-  padding:13px;border:1px solid pink;
-  border-radius:20px;width:80%;
-}
-button {
-  background:#d45c91;color:white;
-  border:0;padding:13px 22px;
-  border-radius:25px;margin:12px;
-}
-.hidden {display:none}
-#flowers {font-size:25px;animation:fall 2s infinite alternate}
-@keyframes fall {
-  from {transform:translateY(-8px)}
-  to {transform:translateY(12px)}
-}
+:root{--paper:#fffaf1;--rose:#bd7181;--ink:#76565a;--line:#e8c9bc}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,serif;background:#f4e5dc;background-image:radial-gradient(#d7b4a8 .7px,transparent .7px);background-size:13px 13px}
+main{min-height:100vh;display:grid;place-items:center;padding:24px 14px}
+.panel{width:min(650px,100%);background:var(--paper);border:1px solid #ead4c8;border-radius:5px;padding:clamp(22px,5vw,42px);box-shadow:0 12px 35px #79554a24;position:relative}
+.panel:before{content:"";position:absolute;inset:9px;border:1px solid #ead8ca;pointer-events:none}
+.inner{position:relative;z-index:1}
+.hidden{display:none!important}
+h1{font-weight:normal;font-size:clamp(2rem,8vw,3.2rem);color:var(--rose);margin:8px 0}
+h2{font-weight:normal;color:var(--rose);text-align:center}
+.kicker{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:#a9857d}
+p{line-height:1.75}
+input,textarea{font:16px Georgia;color:var(--ink);background:#fffdf8;border:1px solid var(--line);padding:12px;border-radius:3px;max-width:100%}
+#password{width:min(290px,100%);text-align:center;letter-spacing:2px}
+button{font:15px Georgia;background:#b97883;color:white;border:0;padding:12px 22px;border-radius:3px;margin:8px 4px}
+.small{font-size:.85rem;color:#a1847d}
+.stamp{display:inline-block;border:1px solid #d8a6a2;color:#b97883;padding:7px 12px;transform:rotate(-5deg);font-size:.8rem;letter-spacing:2px}
+.gift{font-size:82px;cursor:pointer;display:block;margin:18px auto;animation:sway 2s ease-in-out infinite}
+@keyframes sway{50%{transform:rotate(5deg) translateY(-5px)}}
+.letter-wrap{background:#f7eddf;padding:12px;border:1px solid #e5cdbb;box-shadow:0 7px 18px #805d4b20;transform:rotate(-.4deg)}
+.letter{background:#fffaf0;border:1px solid #ead8c5;padding:25px 18px;min-height:340px;position:relative}
+.letter h2{margin:12px 0 18px}
+.letter-body{white-space:pre-wrap;line-height:1.9;padding:12px 4px;min-height:150px}
+.corner-photo{width:94px;height:94px;object-fit:cover;border:5px solid #fffdf7;box-shadow:0 2px 9px #75534b38;background:#f1e2d6}
+.top-photo{float:left;margin:0 14px 10px 0;transform:rotate(-6deg)}
+.bottom-photo{float:right;margin:10px 0 0 14px;transform:rotate(5deg)}
+.photo-placeholder{display:grid;place-items:center;text-align:center;color:#a98b80;font:12px Arial;background:#f3e6da}
+.clear{clear:both}
+.photo-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.photo-tools label,.tool-label{font:13px Arial;color:#94736d;display:block}
+.photo-tools input{width:100%;font-size:12px;margin-top:6px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:12px;margin:18px 0}
+.gallery img{width:100%;aspect-ratio:1;object-fit:cover;background:#eee0d5;padding:5px;box-shadow:0 3px 9px #79554a20;transform:rotate(-2deg)}
+.gallery img:nth-child(even){transform:rotate(2deg)}
+hr{border:0;border-top:1px dashed #d9bcb0;margin:24px 0}
+audio{width:100%;margin-top:10px}
+.flowers{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
+.flower{position:absolute;top:-40px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
+@media(max-width:420px){.corner-photo{width:76px;height:76px}.letter{padding:18px 12px}.photo-tools{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
+<div class="flowers" id="flowers"></div>
+<main>
+<section class="panel" id="login"><div class="inner" style="text-align:center">
+<div class="stamp">A LITTLE KEEPSAKE</div>
+<p class="kicker">A secret birthday surprise</p>
+<h1>For You, With Love ♡</h1>
+<p>Something special is tucked inside this little scrapbook.</p>
+<form id="passwordForm">
+<input id="password" type="password" placeholder="Enter the secret password" autocomplete="off">
+<br><button type="submit">Open the keepsake ♡</button>
+</form><p id="error" class="small" aria-live="polite"></p>
+<p class="small">made with friendship & little memories</p>
+</div></section>
 
-<div class="box" id="login">
-<h1>♡ Secret Garden ♡</h1>
-<p>A little surprise for you...</p>
-<input id="pass" type="password" placeholder="Enter password">
-<br>
-<button onclick="unlock()">Unlock ♡</button>
-<p id="error"></p>
+<section class="panel hidden" id="gift"><div class="inner" style="text-align:center">
+<p class="kicker">A page just for you</p><h1>Happy Birthday!</h1>
+<p>Every good memory deserves a little celebration.</p>
+<div class="gift" id="giftButton">🎁</div>
+<button id="openButton">Unwrap your surprise</button>
+<p class="small">tap the gift to open ♡</p>
+</div></section>
+
+<section class="panel hidden" id="surprise"><div class="inner">
+<div style="text-align:center"><p class="kicker">pressed flowers • paper memories • friendship</p><h1>A Letter for You</h1></div>
+<div class="letter-wrap"><article class="letter">
+<img id="photoTop" class="corner-photo top-photo photo-placeholder" alt="Photo at upper left" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f3e6da'/%3E%3Ctext x='50%25' y='48%25' text-anchor='middle' fill='%23a98b80' font-size='11'%3Ephoto 1%3C/text%3E%3C/svg%3E">
+<img id="photoBottom" class="corner-photo bottom-photo photo-placeholder" alt="Photo at lower right" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f3e6da'/%3E%3Ctext x='50%25' y='48%25' text-anchor='middle' fill='%23a98b80' font-size='11'%3Ephoto 2%3C/text%3E%3C/svg%3E">
+<p class="kicker" style="text-align:center">dear friend,</p>
+<h2>Happy Birthday ♡</h2>
+<div class="letter-body" id="letterText">Dear friend,
+
+Happy Birthday! I hope your day is filled with laughter, lovely surprises, and all the little things that make you happy.
+
+Thank you for being a wonderful friend. Here's to more memories, silly moments, and beautiful days ahead!
+
+With lots of friendship,
+[Your name] ♡</div>
+<div class="clear"></div>
+</article></div>
+<div style="text-align:center"><p class="kicker">little moments, kept forever</p><h2>Our Memory Pages</h2></div>
+<div class="gallery" id="gallery"></div>
+<div id="musicArea"></div>
+<hr>
+<div class="inner">
+<h2>Make it yours</h2>
+<label class="tool-label">Edit your letter
+<textarea id="letterEditor" rows="7" style="display:block;width:100%;margin-top:7px">Dear friend,
+
+Happy Birthday! I hope your day is filled with laughter, lovely surprises, and all the little things that make you happy.
+
+Thank you for being a wonderful friend. Here's to more memories, silly moments, and beautiful days ahead!
+
+With lots of friendship,
+[Your name] ♡</textarea></label>
+<button id="updateLetter">Update letter</button>
+<div class="photo-tools">
+<label>Top-left photo<input id="topInput" type="file" accept="image/*"></label>
+<label>Bottom-right photo<input id="bottomInput" type="file" accept="image/*"></label>
 </div>
-
-<div class="box hidden" id="birthday">
-<h1>Happy Birthday! 🌷</h1>
-<p>Tap the birthday box!</p>
-<button onclick="surprise()">🎁 Open Surprise</button>
+<label class="tool-label" style="margin-top:15px">More memory photos<input id="galleryInput" type="file" accept="image/*" multiple style="display:block;width:100%;margin-top:6px"></label>
+<label class="tool-label" style="margin-top:15px">Birthday song<input id="songInput" type="file" accept="audio/*" style="display:block;width:100%;margin-top:6px"></label>
+<p class="small">Preview uploads work on this device while this page is open. For everyone to see the same photos and song, the media files must also be added to the website repository.</p>
 </div>
-
-<div class="box hidden" id="letter">
-<div id="flowers">🌸 🌷 💗 🌸</div>
-<h1>For You ♡</h1>
-<h2>Happy Birthday!</h2>
-<p id="message">
-Dear qelennn,
-
-HAPPY BITHDAYY TO YOUU!
-
-thankyouu sebab selama ni teman aku codm 
-and sanggup layan kekacipan aku
-
-walaupun kita tak terlalu rapat
-but you need to know that someone in this world
-secretly wish the best for your 
-entire life!!
-
-aku ada beberapa benda nak bagi kau nii
-
-With friendship ♡
-</p>
-<p>Our Little Memories 📸</p>
-<input type="file" accept="image/*" multiple onchange="photos(event)">
-<div id="gallery"></div>
-<p>Our Birthday Song 🎵</p>
-<input type="file" accept="audio/*" onchange="music(event)">
-<div id="player"></div>
-</div>
-
+</div></section>
+</main>
 <script>
-function unlock(){
-if(document.getElementById("pass").value==="pink123"){
-document.getElementById("login").classList.add("hidden");
-document.getElementById("birthday").classList.remove("hidden");
-}else{
-document.getElementById("error").textContent="Wrong password ♡";
-}
-}
-function surprise(){
-document.getElementById("birthday").classList.add("hidden");
-document.getElementById("letter").classList.remove("hidden");
-}
-function photos(e){
-let g=document.getElementById("gallery");
-g.innerHTML="";
-Array.from(e.target.files).forEach(f=>{
-let img=document.createElement("img");
-img.src=URL.createObjectURL(f);
-img.style.width="90px";
-img.style.margin="5px";
-g.appendChild(img);
+(function(){
+const PASSWORD="pink123"; // Change this password before sharing.
+const $=id=>document.getElementById(id);
+$("passwordForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ if($("password").value.trim()===PASSWORD){$("login").classList.add("hidden");$("gift").classList.remove("hidden");$("error").textContent="";}
+ else $("error").textContent="That password isn't quite right. Try again ♡";
 });
+function openLetter(){
+ $("gift").classList.add("hidden");$("surprise").classList.remove("hidden");
+ const area=$("flowers"),symbols=["🌸","🌷","✿","♡","🌼"];
+ for(let i=0;i<32;i++){const f=document.createElement("span");f.className="flower";f.textContent=symbols[Math.floor(Math.random()*symbols.length)];f.style.left=Math.random()*100+"vw";f.style.animationDuration=4+Math.random()*5+"s";f.style.animationDelay=Math.random()*2+"s";area.appendChild(f);setTimeout(()=>f.remove(),11000);}
 }
-function music(e){
-let p=document.getElementById("player");
-p.innerHTML="";
-let a=document.createElement("audio");
-a.controls=true;
-a.src=URL.createObjectURL(e.target.files[0]);
-p.appendChild(a);
-}
+$("giftButton").addEventListener("click",openLetter);$("openButton").addEventListener("click",openLetter);
+$("updateLetter").addEventListener("click",()=>$("letterText").textContent=$("letterEditor").value);
+function setPhoto(inputId,imgId){$(inputId).addEventListener("change",e=>{const file=e.target.files[0];if(file){$(imgId).src=URL.createObjectURL(file);$(imgId).classList.remove("photo-placeholder");}});}
+setPhoto("topInput","photoTop");setPhoto("bottomInput","photoBottom");
+$("galleryInput").addEventListener("change",e=>{const g=$("gallery");g.innerHTML="";Array.from(e.target.files).forEach(file=>{const img=document.createElement("img");img.src=URL.createObjectURL(file);img.alt="Memory photo";g.appendChild(img);});});
+$("songInput").addEventListener("change",e=>{const area=$("musicArea");area.innerHTML="";const file=e.target.files[0];if(file){const audio=document.createElement("audio");audio.controls=true;audio.src=URL.createObjectURL(file);area.appendChild(audio);}});
+})();
 </script>
 </body>
 </html>
