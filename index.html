@@ -1,140 +1,276 @@
  
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A Birthday Keepsake ♡</title>
+<title>A Little Birthday Surprise ♡</title>
 <style>
-:root{--paper:#fffaf1;--rose:#bd7181;--ink:#76565a;--line:#e8c9bc}
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;color:var(--ink);font-family:Georgia,serif;background:#f4e5dc;background-image:radial-gradient(#d7b4a8 .7px,transparent .7px);background-size:13px 13px}
-main{min-height:100vh;display:grid;place-items:center;padding:24px 14px}
-.panel{width:min(650px,100%);background:var(--paper);border:1px solid #ead4c8;border-radius:5px;padding:clamp(22px,5vw,42px);box-shadow:0 12px 35px #79554a24;position:relative}
-.panel:before{content:"";position:absolute;inset:9px;border:1px solid #ead8ca;pointer-events:none}
-.inner{position:relative;z-index:1}
+:root{--pink:#e9a9bd;--dark:#985d70;--cream:#fff9f5;--line:#e9c6cf}
+body{margin:0;background:#fcebf1;color:#875c6b;font-family:Georgia,serif;overflow-x:hidden}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+.screen{min-height:100svh;display:none;align-items:center;justify-content:center;padding:24px 16px;text-align:center;position:relative;overflow:hidden}
+.screen.active{display:flex}
+.paper{width:min(540px,100%);padding:34px 25px;background:var(--cream);border:1px solid var(--line);outline:1px solid #fff;outline-offset:-8px;box-shadow:0 12px 35px #9c647522;position:relative}
+.paper:before,.paper:after{content:"✿";position:absolute;color:#d99bae;font-size:25px}
+.paper:before{top:13px;left:18px}.paper:after{bottom:13px;right:18px}
+.kicker{letter-spacing:3px;font-size:11px;text-transform:uppercase;color:#b27b8d}
+h1{font-weight:normal;font-size:clamp(32px,8vw,48px);color:#bb788e;margin:14px 0}
+h2{font-weight:normal;color:#b8798e}
+p{line-height:1.7}
+.btn{border:1px solid #c88da0;background:#d99caf;color:white;padding:12px 25px;margin:8px;border-radius:3px;box-shadow:0 4px 0 #b97b90}
+.btn:active{transform:translateY(3px);box-shadow:none}
+.btn.light{background:#fff8f7;color:#a66e80}
+.choices{display:flex;justify-content:center;gap:12px;margin-top:24px}
 .hidden{display:none!important}
-h1{font-weight:normal;font-size:clamp(2rem,8vw,3.2rem);color:var(--rose);margin:8px 0}
-h2{font-weight:normal;color:var(--rose);text-align:center}
-.kicker{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:#a9857d}
-p{line-height:1.75}
-input,textarea{font:16px Georgia;color:var(--ink);background:#fffdf8;border:1px solid var(--line);padding:12px;border-radius:3px;max-width:100%}
-#password{width:min(290px,100%);text-align:center;letter-spacing:2px}
-button{font:15px Georgia;background:#b97883;color:white;border:0;padding:12px 22px;border-radius:3px;margin:8px 4px}
-.small{font-size:.85rem;color:#a1847d}
-.stamp{display:inline-block;border:1px solid #d8a6a2;color:#b97883;padding:7px 12px;transform:rotate(-5deg);font-size:.8rem;letter-spacing:2px}
-.gift{font-size:82px;cursor:pointer;display:block;margin:18px auto;animation:sway 2s ease-in-out infinite}
-@keyframes sway{50%{transform:rotate(5deg) translateY(-5px)}}
-.letter-wrap{background:#f7eddf;padding:12px;border:1px solid #e5cdbb;box-shadow:0 7px 18px #805d4b20;transform:rotate(-.4deg)}
-.letter{background:#fffaf0;border:1px solid #ead8c5;padding:25px 18px;min-height:340px;position:relative}
-.letter h2{margin:12px 0 18px}
-.letter-body{white-space:pre-wrap;line-height:1.9;padding:12px 4px;min-height:150px}
-.corner-photo{width:94px;height:94px;object-fit:cover;border:5px solid #fffdf7;box-shadow:0 2px 9px #75534b38;background:#f1e2d6}
-.top-photo{float:left;margin:0 14px 10px 0;transform:rotate(-6deg)}
-.bottom-photo{float:right;margin:10px 0 0 14px;transform:rotate(5deg)}
-.photo-placeholder{display:grid;place-items:center;text-align:center;color:#a98b80;font:12px Arial;background:#f3e6da}
+.small{font-size:12px;color:#b18c96}
+input[type=password]{padding:13px;border:1px solid var(--line);background:#fff;width:min(260px,100%);text-align:center}
+.pot{font-size:105px;filter:drop-shadow(0 8px 6px #a36b7730);animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12px)}}
+.flower{position:absolute;top:-60px;font-size:30px;animation:fall 5s linear forwards;pointer-events:none}
+@keyframes fall{to{transform:translateY(115svh) rotate(500deg);opacity:0}}
+#bloom{position:fixed;inset:0;pointer-events:none;z-index:5}
+#bloom .petal{position:absolute;font-size:35px;animation:spread 2.5s ease-out forwards}
+@keyframes spread{0%{transform:scale(.2);opacity:0}60%{opacity:1}100%{transform:translate(var(--x),var(--y)) scale(2.1) rotate(130deg);opacity:0}}
+#giftBox{font-size:110px;display:block;margin:15px auto;animation:float 2.5s infinite;cursor:pointer}
+.zoom{animation:zoom 1.3s ease-in forwards}
+@keyframes zoom{to{transform:scale(5);opacity:0}}
+#letterScreen{background:#f9e4eb}
+.envelope{width:min(580px,100%);perspective:1000px}
+.letter{background:#fffaf2;border:1px solid #e7c7bb;padding:25px 18px;box-shadow:0 10px 25px #8d536522;position:relative;transform-origin:top;animation:unfold 1.8s ease both}
+@keyframes unfold{0%{transform:rotateX(85deg) scaleY(.2);opacity:0}100%{transform:rotateX(0) scaleY(1);opacity:1}}
+.photo{width:100px;height:100px;object-fit:cover;background:#f3dfe5;border:6px solid white;box-shadow:0 3px 10px #9a687333}
+.left{float:left;margin:0 13px 10px 0;transform:rotate(-5deg)}
+.right{float:right;margin:10px 0 0 13px;transform:rotate(5deg)}
 .clear{clear:both}
-.photo-tools{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.photo-tools label,.tool-label{font:13px Arial;color:#94736d;display:block}
-.photo-tools input{width:100%;font-size:12px;margin-top:6px}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:12px;margin:18px 0}
-.gallery img{width:100%;aspect-ratio:1;object-fit:cover;background:#eee0d5;padding:5px;box-shadow:0 3px 9px #79554a20;transform:rotate(-2deg)}
-.gallery img:nth-child(even){transform:rotate(2deg)}
-hr{border:0;border-top:1px dashed #d9bcb0;margin:24px 0}
-audio{width:100%;margin-top:10px}
-.flowers{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:5}
-.flower{position:absolute;top:-40px;animation:fall linear forwards}
-@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:0}}
-@media(max-width:420px){.corner-photo{width:76px;height:76px}.letter{padding:18px 12px}.photo-tools{grid-template-columns:1fr}}
+textarea{width:100%;padding:12px;border:1px solid var(--line);background:#fffdfb;color:#875c6b;line-height:1.6}
+.tools{background:#fff5f5;padding:15px;margin-top:18px;text-align:left;border:1px dashed #dfb5c1}
+.tools label{display:block;font-size:13px;margin:12px 0}
+.tools input{display:block;width:100%;margin-top:6px;font-size:12px}
+audio{width:100%;margin-top:8px}
+#gallery{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+#gallery img{width:95px;height:95px;object-fit:cover;border:5px solid white;box-shadow:0 2px 8px #9a687333}
 </style>
 </head>
 <body>
-<div class="flowers" id="flowers"></div>
-<main>
-<section class="panel" id="login"><div class="inner" style="text-align:center">
-<div class="stamp">A LITTLE KEEPSAKE</div>
-<p class="kicker">A secret birthday surprise</p>
-<h1>For You, With Love ♡</h1>
-<p>Something special is tucked inside this little scrapbook.</p>
-<form id="passwordForm">
-<input id="password" type="password" placeholder="Enter the secret password" autocomplete="off">
-<br><button type="submit">Open the keepsake ♡</button>
-</form><p id="error" class="small" aria-live="polite"></p>
-<p class="small">made with friendship & little memories</p>
-</div></section>
 
-<section class="panel hidden" id="gift"><div class="inner" style="text-align:center">
-<p class="kicker">A page just for you</p><h1>Happy Birthday!</h1>
-<p>Every good memory deserves a little celebration.</p>
-<div class="gift" id="giftButton">🎁</div>
-<button id="openButton">Unwrap your surprise</button>
-<p class="small">tap the gift to open ♡</p>
-</div></section>
+<!-- FIRST SCREEN -->
+<section class="screen active" id="welcome">
+<div class="paper">
+<p class="kicker">A little surprise awaits</p>
+<h1>i have prepared a gift for you</h1>
+<p>want it or not?</p>
+<div class="choices">
+<button class="btn light" id="no">X</button>
+<button class="btn" id="yes">✔️</button>
+</div>
+<p class="small">♡ made especially for you ♡</p>
+</div>
+</section>
 
-<section class="panel hidden" id="surprise"><div class="inner">
-<div style="text-align:center"><p class="kicker">pressed flowers • paper memories • friendship</p><h1>A Letter for You</h1></div>
-<div class="letter-wrap"><article class="letter">
-<img id="photoTop" class="corner-photo top-photo photo-placeholder" alt="Photo at upper left" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f3e6da'/%3E%3Ctext x='50%25' y='48%25' text-anchor='middle' fill='%23a98b80' font-size='11'%3Ephoto 1%3C/text%3E%3C/svg%3E">
-<img id="photoBottom" class="corner-photo bottom-photo photo-placeholder" alt="Photo at lower right" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f3e6da'/%3E%3Ctext x='50%25' y='48%25' text-anchor='middle' fill='%23a98b80' font-size='11'%3Ephoto 2%3C/text%3E%3C/svg%3E">
-<p class="kicker" style="text-align:center">dear friend,</p>
+<!-- PLEASE SCREEN -->
+<section class="screen" id="please">
+<div class="paper">
+<p class="kicker">wait a minute...</p>
+<h1>aw please? ♡</h1>
+<p>i prepared this gift especially for you</p>
+<button class="btn" id="pleaseYes">✔️</button>
+</div>
+</section>
+
+<!-- PASSWORD -->
+<section class="screen" id="passwordScreen">
+<div class="paper">
+<p class="kicker">a secret little door</p>
+<h1>One tiny password</h1>
+<p>Enter the password to continue ♡</p>
+<form id="passForm">
+<input type="password" id="pass" placeholder="Your secret password">
+<br><button class="btn">Unlock</button>
+</form>
+<p id="passError" class="small"></p>
+</div>
+</section>
+
+<!-- FLOWERPOT -->
+<section class="screen" id="potScreen">
+<div class="paper">
+<p class="kicker">something is growing...</p>
+<h1>A little flower for you</h1>
+<div class="pot">🪴</div>
+<p>Tap the button and break the flowerpot to see what's inside!</p>
+<button class="btn" id="breakPot">Break the flowerpot ♡</button>
+</div>
+</section>
+
+<!-- BLOOM AND GIFT -->
+<section class="screen" id="giftScreen">
+<div class="paper">
+<p class="kicker">a gift from the flowers</p>
+<h1>Look what appeared!</h1>
+<div id="giftBox">🎁</div>
+<p>Your surprise is waiting inside.</p>
+<button class="btn" id="openGift">Open your gift ♡</button>
+</div>
+</section>
+
+<!-- LETTER -->
+<section class="screen" id="letterScreen">
+<div class="envelope">
+<div class="letter">
+<p class="kicker">a little letter, just for you</p>
 <h2>Happy Birthday ♡</h2>
-<div class="letter-body" id="letterText">Dear friend,
+<img id="photo1" class="photo left" alt="First photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f3dfe5'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23a66e80' font-size='12'%3EPhoto 1%3C/text%3E%3C/svg%3E">
+<img id="photo2" class="photo right" alt="Second photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23f3dfe5'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23a66e80' font-size='12'%3EPhoto 2%3C/text%3E%3C/svg%3E">
+<div id="message" style="white-space:pre-wrap;line-height:1.9;text-align:left">
+Dear friend,
 
-Happy Birthday! I hope your day is filled with laughter, lovely surprises, and all the little things that make you happy.
+Happy Birthday! ♡
 
-Thank you for being a wonderful friend. Here's to more memories, silly moments, and beautiful days ahead!
+I hope your day is filled with happiness, laughter and beautiful memories.
 
-With lots of friendship,
-[Your name] ♡</div>
+Thank you for being such a wonderful friend. May this new chapter bring you lots of good things!
+
+With friendship,
+Your friend ♡
+</div>
 <div class="clear"></div>
-</article></div>
-<div style="text-align:center"><p class="kicker">little moments, kept forever</p><h2>Our Memory Pages</h2></div>
-<div class="gallery" id="gallery"></div>
-<div id="musicArea"></div>
+<p class="small">♡ a memory to keep ♡</p>
+</div>
+
+<div class="tools">
+<h2>Edit your birthday letter</h2>
+<textarea id="messageEdit" rows="8">Dear friend,
+
+Happy Birthday! ♡
+
+I hope your day is filled with happiness, laughter and beautiful memories.
+
+Thank you for being such a wonderful friend. May this new chapter bring you lots of good things!
+
+With friendship,
+Your friend ♡</textarea>
+<button class="btn" id="updateMessage">Update letter</button>
+
+<label>Change top-left photo
+<input type="file" id="upload1" accept="image/*">
+</label>
+<label>Change bottom-right photo
+<input type="file" id="upload2" accept="image/*">
+</label>
 <hr>
-<div class="inner">
-<h2>Make it yours</h2>
-<label class="tool-label">Edit your letter
-<textarea id="letterEditor" rows="7" style="display:block;width:100%;margin-top:7px">Dear friend,
-
-Happy Birthday! I hope your day is filled with laughter, lovely surprises, and all the little things that make you happy.
-
-Thank you for being a wonderful friend. Here's to more memories, silly moments, and beautiful days ahead!
-
-With lots of friendship,
-[Your name] ♡</textarea></label>
-<button id="updateLetter">Update letter</button>
-<div class="photo-tools">
-<label>Top-left photo<input id="topInput" type="file" accept="image/*"></label>
-<label>Bottom-right photo<input id="bottomInput" type="file" accept="image/*"></label>
+<h2>Your two songs</h2>
+<label>Song 1 — welcome and flowerpot
+<input type="file" id="song1" accept="audio/*">
+</label>
+<label>Song 2 — after opening the gift
+<input type="file" id="song2" accept="audio/*">
+</label>
+<p class="small">Uploads are previews on this device. To make the same photos and music appear for everyone, add the files to your GitHub repository too.</p>
+<audio id="player" controls></audio>
 </div>
-<label class="tool-label" style="margin-top:15px">More memory photos<input id="galleryInput" type="file" accept="image/*" multiple style="display:block;width:100%;margin-top:6px"></label>
-<label class="tool-label" style="margin-top:15px">Birthday song<input id="songInput" type="file" accept="audio/*" style="display:block;width:100%;margin-top:6px"></label>
-<p class="small">Preview uploads work on this device while this page is open. For everyone to see the same photos and song, the media files must also be added to the website repository.</p>
 </div>
-</div></section>
-</main>
+</section>
+
+<div id="bloom"></div>
+
 <script>
-(function(){
-const PASSWORD="pink123"; // Change this password before sharing.
+const PASSWORD="pink123";
 const $=id=>document.getElementById(id);
-$("passwordForm").addEventListener("submit",e=>{
- e.preventDefault();
- if($("password").value.trim()===PASSWORD){$("login").classList.add("hidden");$("gift").classList.remove("hidden");$("error").textContent="";}
- else $("error").textContent="That password isn't quite right. Try again ♡";
-});
-function openLetter(){
- $("gift").classList.add("hidden");$("surprise").classList.remove("hidden");
- const area=$("flowers"),symbols=["🌸","🌷","✿","♡","🌼"];
- for(let i=0;i<32;i++){const f=document.createElement("span");f.className="flower";f.textContent=symbols[Math.floor(Math.random()*symbols.length)];f.style.left=Math.random()*100+"vw";f.style.animationDuration=4+Math.random()*5+"s";f.style.animationDelay=Math.random()*2+"s";area.appendChild(f);setTimeout(()=>f.remove(),11000);}
+let songOneURL="",songTwoURL="";
+
+function show(id){
+ document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+ $(id).classList.add("active");
+ window.scrollTo(0,0);
 }
-$("giftButton").addEventListener("click",openLetter);$("openButton").addEventListener("click",openLetter);
-$("updateLetter").addEventListener("click",()=>$("letterText").textContent=$("letterEditor").value);
-function setPhoto(inputId,imgId){$(inputId).addEventListener("change",e=>{const file=e.target.files[0];if(file){$(imgId).src=URL.createObjectURL(file);$(imgId).classList.remove("photo-placeholder");}});}
-setPhoto("topInput","photoTop");setPhoto("bottomInput","photoBottom");
-$("galleryInput").addEventListener("change",e=>{const g=$("gallery");g.innerHTML="";Array.from(e.target.files).forEach(file=>{const img=document.createElement("img");img.src=URL.createObjectURL(file);img.alt="Memory photo";g.appendChild(img);});});
-$("songInput").addEventListener("change",e=>{const area=$("musicArea");area.innerHTML="";const file=e.target.files[0];if(file){const audio=document.createElement("audio");audio.controls=true;audio.src=URL.createObjectURL(file);area.appendChild(audio);}});
-})();
+function startSong(url){
+ if(!url)return;
+ const player=$("player");
+ player.src=url;
+ player.play().catch(()=>{});
+}
+function chooseFirst(){
+ startSong(songOneURL);
+ show("passwordScreen");
+}
+$("no").onclick=()=>show("please");
+$("yes").onclick=chooseFirst;
+$("pleaseYes").onclick=chooseFirst;
+
+$("passForm").onsubmit=e=>{
+ e.preventDefault();
+ if($("pass").value===PASSWORD){
+ $("passError").textContent="";
+ show("potScreen");
+ }else{
+ $("passError").textContent="Not quite! Try again ♡";
+ }
+};
+
+function bloom(){
+ const layer=$("bloom");
+ layer.innerHTML="";
+ const symbols=["🌸","🌺","🌷","🌼","🌸","✿"];
+ for(let i=0;i<45;i++){
+  const p=document.createElement("span");
+  p.className="petal";
+  p.textContent=symbols[i%symbols.length];
+  p.style.left=(Math.random()*100)+"%";
+  p.style.top=(Math.random()*100)+"%";
+  p.style.setProperty("--x",(Math.random()*300-150)+"px");
+  p.style.setProperty("--y",(Math.random()*300-150)+"px");
+  p.style.animationDelay=(Math.random()*.8)+"s";
+  layer.appendChild(p);
+ }
+ setTimeout(()=>{
+  layer.innerHTML="";
+  show("giftScreen");
+ },2600);
+}
+$("breakPot").onclick=()=>{
+ $("potScreen").querySelector(".pot").textContent="💥";
+ bloom();
+};
+
+$("openGift").onclick=()=>{
+ $("giftBox").classList.add("zoom");
+ setTimeout(()=>{
+  startSong(songTwoURL);
+  show("letterScreen");
+ },850);
+};
+
+$("updateMessage").onclick=()=>{
+ $("message").textContent=$("messageEdit").value;
+};
+
+function photoUpload(input,img){
+ $(input).onchange=e=>{
+  const file=e.target.files[0];
+  if(file)$(img).src=URL.createObjectURL(file);
+ };
+}
+photoUpload("upload1","photo1");
+photoUpload("upload2","photo2");
+
+function songUpload(input,which){
+ $(input).onchange=e=>{
+  const file=e.target.files[0];
+  if(!file)return;
+  const url=URL.createObjectURL(file);
+  if(which===1)songOneURL=url;
+  else songTwoURL=url;
+  if(which===2){
+   $("player").src=url;
+  }
+ };
+}
+songUpload("song1",1);
+songUpload("song2",2);
 </script>
 </body>
 </html>
+
