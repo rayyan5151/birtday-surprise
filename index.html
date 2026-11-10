@@ -1,276 +1,258 @@
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A Little Birthday Surprise ♡</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Secret For You</title>
+
 <style>
 *{box-sizing:border-box}
-:root{--pink:#e9a9bd;--dark:#985d70;--cream:#fff9f5;--line:#e9c6cf}
-body{margin:0;background:#fcebf1;color:#875c6b;font-family:Georgia,serif;overflow-x:hidden}
-button,input,textarea{font:inherit}
-button{cursor:pointer}
-.screen{min-height:100svh;display:none;align-items:center;justify-content:center;padding:24px 16px;text-align:center;position:relative;overflow:hidden}
+body{
+ margin:0;background:#f9e6e9;color:#76515a;
+ font-family:Georgia,serif;overflow-x:hidden;
+}
+button{font-family:inherit;cursor:pointer}
+.screen{
+ min-height:100vh;display:none;align-items:center;
+ justify-content:center;flex-direction:column;
+ text-align:center;padding:25px;
+}
 .screen.active{display:flex}
-.paper{width:min(540px,100%);padding:34px 25px;background:var(--cream);border:1px solid var(--line);outline:1px solid #fff;outline-offset:-8px;box-shadow:0 12px 35px #9c647522;position:relative}
-.paper:before,.paper:after{content:"✿";position:absolute;color:#d99bae;font-size:25px}
-.paper:before{top:13px;left:18px}.paper:after{bottom:13px;right:18px}
-.kicker{letter-spacing:3px;font-size:11px;text-transform:uppercase;color:#b27b8d}
-h1{font-weight:normal;font-size:clamp(32px,8vw,48px);color:#bb788e;margin:14px 0}
-h2{font-weight:normal;color:#b8798e}
-p{line-height:1.7}
-.btn{border:1px solid #c88da0;background:#d99caf;color:white;padding:12px 25px;margin:8px;border-radius:3px;box-shadow:0 4px 0 #b97b90}
-.btn:active{transform:translateY(3px);box-shadow:none}
-.btn.light{background:#fff8f7;color:#a66e80}
-.choices{display:flex;justify-content:center;gap:12px;margin-top:24px}
-.hidden{display:none!important}
-.small{font-size:12px;color:#b18c96}
-input[type=password]{padding:13px;border:1px solid var(--line);background:#fff;width:min(260px,100%);text-align:center}
-.pot{font-size:105px;filter:drop-shadow(0 8px 6px #a36b7730);animation:float 3s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-12px)}}
-.flower{position:absolute;top:-60px;font-size:30px;animation:fall 5s linear forwards;pointer-events:none}
-@keyframes fall{to{transform:translateY(115svh) rotate(500deg);opacity:0}}
-#bloom{position:fixed;inset:0;pointer-events:none;z-index:5}
-#bloom .petal{position:absolute;font-size:35px;animation:spread 2.5s ease-out forwards}
-@keyframes spread{0%{transform:scale(.2);opacity:0}60%{opacity:1}100%{transform:translate(var(--x),var(--y)) scale(2.1) rotate(130deg);opacity:0}}
-#giftBox{font-size:110px;display:block;margin:15px auto;animation:float 2.5s infinite;cursor:pointer}
-.zoom{animation:zoom 1.3s ease-in forwards}
-@keyframes zoom{to{transform:scale(5);opacity:0}}
-#letterScreen{background:#f9e4eb}
-.envelope{width:min(580px,100%);perspective:1000px}
-.letter{background:#fffaf2;border:1px solid #e7c7bb;padding:25px 18px;box-shadow:0 10px 25px #8d536522;position:relative;transform-origin:top;animation:unfold 1.8s ease both}
-@keyframes unfold{0%{transform:rotateX(85deg) scaleY(.2);opacity:0}100%{transform:rotateX(0) scaleY(1);opacity:1}}
-.photo{width:100px;height:100px;object-fit:cover;background:#f3dfe5;border:6px solid white;box-shadow:0 3px 10px #9a687333}
-.left{float:left;margin:0 13px 10px 0;transform:rotate(-5deg)}
-.right{float:right;margin:10px 0 0 13px;transform:rotate(5deg)}
-.clear{clear:both}
-textarea{width:100%;padding:12px;border:1px solid var(--line);background:#fffdfb;color:#875c6b;line-height:1.6}
-.tools{background:#fff5f5;padding:15px;margin-top:18px;text-align:left;border:1px dashed #dfb5c1}
-.tools label{display:block;font-size:13px;margin:12px 0}
-.tools input{display:block;width:100%;margin-top:6px;font-size:12px}
-audio{width:100%;margin-top:8px}
-#gallery{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
-#gallery img{width:95px;height:95px;object-fit:cover;border:5px solid white;box-shadow:0 2px 8px #9a687333}
+h1{font-weight:normal;font-size:clamp(28px,7vw,43px)}
+p{line-height:1.8}
+.card{
+ background:#fff8f2;padding:30px 24px;border-radius:8px;
+ box-shadow:0 10px 35px #a66d7925;max-width:430px;width:100%;
+}
+.btn{
+ border:1px solid #bd8994;background:#d99eae;color:white;
+ padding:12px 30px;border-radius:30px;font-size:16px;
+ margin:8px;transition:.3s;
+}
+.btn:hover{transform:scale(1.05)}
+.btn.light{background:#fff5f5;color:#a56d7a}
+input{
+ padding:13px;border:1px solid #d8aab3;background:#fffafa;
+ border-radius:8px;width:100%;margin:15px 0;
+ font-size:16px;text-align:center;color:#76515a;
+}
+.small{font-size:13px;color:#a9878d}
+img{max-width:100%;object-fit:contain}
+.reaction{width:190px;margin:10px auto}
+.vase{width:min(260px,70vw);animation:float 3s infinite ease-in-out}
+.gift{width:min(280px,75vw);animation:float 3s infinite ease-in-out}
+@keyframes float{50%{transform:translateY(-13px)}}
+#flowers{
+ position:fixed;inset:0;pointer-events:none;z-index:10;
+ overflow:hidden;
+}
+.petal{
+ position:absolute;top:-50px;font-size:27px;
+ animation:fall 3.5s linear forwards;
+}
+@keyframes fall{
+ to{transform:translateY(110vh) rotate(650deg);opacity:0}
+}
+.shake{animation:shake .5s}
+@keyframes shake{
+ 0%,100%{transform:translateX(0)}
+ 25%{transform:translateX(-9px)}
+ 75%{transform:translateX(9px)}
+}
+.book{
+ width:min(440px,94vw);min-height:420px;
+ perspective:1200px;position:relative;margin-top:15px;
+}
+.book-page{
+ background:#f7edda;min-height:420px;padding:28px 23px;
+ border:1px solid #d8c5a4;
+ box-shadow:0 8px 25px #795a4c30;
+ border-radius:4px;position:relative;
+}
+.book-page:before{
+ content:"";position:absolute;left:50%;top:0;bottom:0;
+ width:1px;background:#ddcbb0;opacity:.5;
+}
+.book-cover{
+ position:absolute;inset:0;background:#bd8292;
+ color:#fff2e8;border:3px solid #e4c18b;
+ transform-origin:left;transition:transform 2s ease;
+ display:flex;align-items:center;justify-content:center;
+ flex-direction:column;z-index:2;
+ box-shadow:inset 0 0 20px #75404c50;
+}
+.book.open .book-cover{transform:rotateY(-155deg)}
+.book-cover h2{font-weight:normal;font-size:30px}
+.ribbon{width:30px;height:100%;background:#e7c58c;position:absolute;left:50%}
+.photos{
+ display:flex;justify-content:space-between;align-items:flex-start;
+ gap:15px;margin:15px 0 25px;
+}
+.polaroid{
+ background:white;padding:8px 8px 22px;
+ width:44%;box-shadow:0 4px 12px #76515a30;
+ transform:rotate(-4deg);
+}
+.polaroid:nth-child(2){transform:rotate(4deg);margin-top:90px}
+.polaroid img{width:100%;height:115px;object-fit:cover}
+.message{font-size:15px;line-height:1.9;white-space:pre-line}
 </style>
 </head>
-<body>
 
-<!-- FIRST SCREEN -->
+<body>
+<div id="flowers"></div>
+
+<!-- FIRST PAGE -->
 <section class="screen active" id="welcome">
-<div class="paper">
-<p class="kicker">A little surprise awaits</p>
-<h1>i have prepared a gift for you</h1>
-<p>want it or not?</p>
-<div class="choices">
-<button class="btn light" id="no">X</button>
-<button class="btn" id="yes">✔️</button>
-</div>
-<p class="small">♡ made especially for you ♡</p>
-</div>
+ <div class="card">
+  <p class="small">A LITTLE SOMETHING FOR YOU</p>
+  <h1>i have prepared a gift for you</h1>
+  <p>want it or not?</p>
+  <button class="btn light" onclick="noThanks()">X</button>
+  <button class="btn" onclick="go('password')">✔</button>
+ </div>
 </section>
 
-<!-- PLEASE SCREEN -->
-<section class="screen" id="please">
-<div class="paper">
-<p class="kicker">wait a minute...</p>
-<h1>aw please? ♡</h1>
-<p>i prepared this gift especially for you</p>
-<button class="btn" id="pleaseYes">✔️</button>
-</div>
+<!-- X REACTION -->
+<section class="screen" id="reaction">
+ <div class="card">
+  <img class="reaction" src="please.jpg" alt="Please">
+  <h1>Pliissss!!!</h1>
+  <p>aw please? i prepared this gift especially for you</p>
+  <button class="btn" onclick="go('password')">✔</button>
+ </div>
 </section>
 
 <!-- PASSWORD -->
-<section class="screen" id="passwordScreen">
-<div class="paper">
-<p class="kicker">a secret little door</p>
-<h1>One tiny password</h1>
-<p>Enter the password to continue ♡</p>
-<form id="passForm">
-<input type="password" id="pass" placeholder="Your secret password">
-<br><button class="btn">Unlock</button>
-</form>
-<p id="passError" class="small"></p>
-</div>
+<section class="screen" id="password">
+ <div class="card">
+  <p class="small">A LITTLE SECRET BETWEEN US</p>
+  <h1>Before you enter...</h1>
+  <p>some things are only meant for us to know.</p>
+  <input id="pass" type="password" placeholder="Enter the secret password">
+  <button class="btn" onclick="checkPass()">Unlock</button>
+  <p id="error" class="small"></p>
+ </div>
 </section>
 
-<!-- FLOWERPOT -->
-<section class="screen" id="potScreen">
-<div class="paper">
-<p class="kicker">something is growing...</p>
-<h1>A little flower for you</h1>
-<div class="pot">🪴</div>
-<p>Tap the button and break the flowerpot to see what's inside!</p>
-<button class="btn" id="breakPot">Break the flowerpot ♡</button>
-</div>
+<!-- FLOWER POT -->
+<section class="screen" id="vase">
+ <div class="card">
+  <p class="small">A LITTLE GIFT</p>
+  <h1>Something is waiting for you...</h1>
+  <img class="vase" src="flower-vase.jpg" alt="Pink flowers">
+  <p>Would you break this little flowerpot?</p>
+  <button class="btn" onclick="breakVase()">Break it!</button>
+ </div>
 </section>
 
-<!-- BLOOM AND GIFT -->
-<section class="screen" id="giftScreen">
-<div class="paper">
-<p class="kicker">a gift from the flowers</p>
-<h1>Look what appeared!</h1>
-<div id="giftBox">🎁</div>
-<p>Your surprise is waiting inside.</p>
-<button class="btn" id="openGift">Open your gift ♡</button>
-</div>
+<!-- GIFT BOX -->
+<section class="screen" id="gift">
+ <div class="card">
+  <p class="small">SURPRISE!</p>
+  <h1>Something special inside.</h1>
+  <img class="gift" id="giftImage" src="gift-box.jpg" alt="Gift box">
+  <p id="giftText">Ready to open your gift?</p>
+  <button class="btn" id="openGift" onclick="openGift()">Open my gift</button>
+ </div>
 </section>
 
-<!-- LETTER -->
-<section class="screen" id="letterScreen">
-<div class="envelope">
-<div class="letter">
-<p class="kicker">a little letter, just for you</p>
-<h2>Happy Birthday ♡</h2>
-<img id="photo1" class="photo left" alt="First photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect width='100%25' height='100%25' fill='%23f3dfe5'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23a66e80' font-size='12'%3EPhoto 1%3C/text%3E%3C/svg%3E">
-<img id="photo2" class="photo right" alt="Second photo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect width='100%25' height='100%25' fill='%23f3dfe5'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23a66e80' font-size='12'%3EPhoto 2%3C/text%3E%3C/svg%3E">
-<div id="message" style="white-space:pre-wrap;line-height:1.9;text-align:left">
-Dear friend,
+<!-- BOOK -->
+<section class="screen" id="diary">
+ <p class="small">A MEMORY, JUST FOR YOU</p>
+ <div class="book" id="book">
+  <div class="book-page">
+   <p class="small">A little note for you</p>
+   <div class="photos">
+    <div class="polaroid">
+     <img src="photo1.jpg" alt="Memory one">
+     <p class="small">memory 01</p>
+    </div>
+    <div class="polaroid">
+     <img src="photo2.jpg" alt="Memory two">
+     <p class="small">memory 02</p>
+    </div>
+   </div>
+   <h2 style="font-weight:normal">Happy Birthday!</h2>
+   <p class="message" id="birthdayMessage">To someone who started as a stranger in a game, but somehow became someone worth remembering.
 
-Happy Birthday! ♡
+I hope your days are filled with happiness, beautiful memories and countless reasons to smile.
 
-I hope your day is filled with happiness, laughter and beautiful memories.
+Thank you for being part of this little story.
 
-Thank you for being such a wonderful friend. May this new chapter bring you lots of good things!
-
-With friendship,
-Your friend ♡
-</div>
-<div class="clear"></div>
-<p class="small">♡ a memory to keep ♡</p>
-</div>
-
-<div class="tools">
-<h2>Edit your birthday letter</h2>
-<textarea id="messageEdit" rows="8">Dear friend,
-
-Happy Birthday! ♡
-
-I hope your day is filled with happiness, laughter and beautiful memories.
-
-Thank you for being such a wonderful friend. May this new chapter bring you lots of good things!
-
-With friendship,
-Your friend ♡</textarea>
-<button class="btn" id="updateMessage">Update letter</button>
-
-<label>Change top-left photo
-<input type="file" id="upload1" accept="image/*">
-</label>
-<label>Change bottom-right photo
-<input type="file" id="upload2" accept="image/*">
-</label>
-<hr>
-<h2>Your two songs</h2>
-<label>Song 1 — welcome and flowerpot
-<input type="file" id="song1" accept="audio/*">
-</label>
-<label>Song 2 — after opening the gift
-<input type="file" id="song2" accept="audio/*">
-</label>
-<p class="small">Uploads are previews on this device. To make the same photos and music appear for everyone, add the files to your GitHub repository too.</p>
-<audio id="player" controls></audio>
-</div>
-</div>
+— Rynn</p>
+  </div>
+  <div class="book-cover">
+   <div class="ribbon"></div>
+   <h2>A Little Secret</h2>
+   <p>For You ♡</p>
+   <p class="small" style="color:#fff">tap to open</p>
+  </div>
+ </div>
+ <button class="btn" id="bookButton" onclick="openBook()">Open the diary</button>
 </section>
 
-<div id="bloom"></div>
+<audio id="song1" src="song1.mp3" loop></audio>
+<audio id="song2" src="song2.mp3" loop></audio>
 
 <script>
-const PASSWORD="pink123";
-const $=id=>document.getElementById(id);
-let songOneURL="",songTwoURL="";
-
-function show(id){
- document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
- $(id).classList.add("active");
+function go(id){
+ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
  window.scrollTo(0,0);
 }
-function startSong(url){
- if(!url)return;
- const player=$("player");
- player.src=url;
- player.play().catch(()=>{});
-}
-function chooseFirst(){
- startSong(songOneURL);
- show("passwordScreen");
-}
-$("no").onclick=()=>show("please");
-$("yes").onclick=chooseFirst;
-$("pleaseYes").onclick=chooseFirst;
+function noThanks(){go('reaction')}
 
-$("passForm").onsubmit=e=>{
- e.preventDefault();
- if($("pass").value===PASSWORD){
- $("passError").textContent="";
- show("potScreen");
+function checkPass(){
+ const value=document.getElementById('pass').value.trim().toLowerCase();
+ if(value==='secretlyours'){
+  document.getElementById('error').textContent='';
+  document.getElementById('song1').play().catch(()=>{});
+  go('vase');
  }else{
- $("passError").textContent="Not quite! Try again ♡";
+  document.getElementById('error').textContent='Not quite... try again ♡';
+  document.getElementById('pass').classList.add('shake');
+  setTimeout(()=>document.getElementById('pass').classList.remove('shake'),500);
  }
-};
+}
 
-function bloom(){
- const layer=$("bloom");
- layer.innerHTML="";
- const symbols=["🌸","🌺","🌷","🌼","🌸","✿"];
- for(let i=0;i<45;i++){
-  const p=document.createElement("span");
-  p.className="petal";
-  p.textContent=symbols[i%symbols.length];
-  p.style.left=(Math.random()*100)+"%";
-  p.style.top=(Math.random()*100)+"%";
-  p.style.setProperty("--x",(Math.random()*300-150)+"px");
-  p.style.setProperty("--y",(Math.random()*300-150)+"px");
-  p.style.animationDelay=(Math.random()*.8)+"s";
-  layer.appendChild(p);
+function petals(){
+ const area=document.getElementById('flowers');
+ for(let i=0;i<65;i++){
+  const p=document.createElement('div');
+  p.className='petal';
+  p.textContent=['🌸','✿','❀','🌷'][Math.floor(Math.random()*4)];
+  p.style.left=Math.random()*100+'%';
+  p.style.animationDelay=Math.random()*2+'s';
+  p.style.fontSize=(15+Math.random()*25)+'px';
+  area.appendChild(p);
+  setTimeout(()=>p.remove(),6000);
  }
+}
+function breakVase(){
+ petals();
+ setTimeout(()=>go('gift'),1200);
+}
+function openGift(){
+ const image=document.getElementById('giftImage');
+ image.classList.add('shake');
+ document.getElementById('giftText').textContent='Your little surprise is opening...';
+ document.getElementById('openGift').disabled=true;
  setTimeout(()=>{
-  layer.innerHTML="";
-  show("giftScreen");
- },2600);
+  document.getElementById('song1').pause();
+  document.getElementById('song2').play().catch(()=>{});
+  go('diary');
+ },1600);
 }
-$("breakPot").onclick=()=>{
- $("potScreen").querySelector(".pot").textContent="💥";
- bloom();
-};
-
-$("openGift").onclick=()=>{
- $("giftBox").classList.add("zoom");
- setTimeout(()=>{
-  startSong(songTwoURL);
-  show("letterScreen");
- },850);
-};
-
-$("updateMessage").onclick=()=>{
- $("message").textContent=$("messageEdit").value;
-};
-
-function photoUpload(input,img){
- $(input).onchange=e=>{
-  const file=e.target.files[0];
-  if(file)$(img).src=URL.createObjectURL(file);
- };
+function openBook(){
+ const book=document.getElementById('book');
+ book.classList.add('open');
+ document.getElementById('bookButton').textContent='Enjoy your little gift ♡';
+ document.getElementById('bookButton').disabled=true;
 }
-photoUpload("upload1","photo1");
-photoUpload("upload2","photo2");
-
-function songUpload(input,which){
- $(input).onchange=e=>{
-  const file=e.target.files[0];
-  if(!file)return;
-  const url=URL.createObjectURL(file);
-  if(which===1)songOneURL=url;
-  else songTwoURL=url;
-  if(which===2){
-   $("player").src=url;
-  }
- };
-}
-songUpload("song1",1);
-songUpload("song2",2);
 </script>
 </body>
 </html>
+
 
